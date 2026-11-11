@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/><meta http-equiv="Pragma" content="no-cache"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Algorithmen · Klasse 6 – vier interaktive Arbeitsblätter · Version 8</title>
+<style>
+:root{--ink:#263249;--muted:#687389;--sky:#e8f3ff;--blue:#366bdd;--paper:#fff;--line:#dce4ed;--good:#14764e;--bad:#ae3246;--yellow:#fff5d9;--back:#f4f7fc;--shadow:0 5px 21px #25334f12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--back);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #90baff;outline-offset:2px}
+.wrap{max-width:1130px;margin:0 auto;padding:0 19px}.top{background:linear-gradient(120deg,#163c79,#3876b7);color:white;padding:23px 0 18px}.top h1{font-size:clamp(23px,4vw,36px);line-height:1.18;margin:6px 0}.top p{margin:0;color:#e9f2ff}.top .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.caps{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#d6eaff}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{background:#ffffff26;color:white;border:1px solid #ffffff77;padding:9px 12px;border-radius:12px;font-size:14px;font-weight:700}
+.nav{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;box-shadow:0 2px 9px #20334912}.tabs{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:11px 0}.tab{display:inline-block;text-decoration:none;white-space:nowrap;padding:10px 13px;border:1px solid #dbe3ef;border-radius:12px;background:#f8faff;color:#425370;font-weight:750}.tab[aria-selected=true]{background:#245db8;color:white;border-color:#245db8}.tab .mini{display:inline-block;border-radius:5px;padding:0px 5px;margin-right:5px;background:#e3eafd;color:#2857a1;font-size:12px}.tab[aria-selected=true] .mini{background:#ffffff30;color:white}
+main{padding-top:23px;padding-bottom:65px}/* Navigation works without JavaScript (Safari / file preview) */
+.page{display:none;margin-bottom:26px}#ab1{display:block}
+main:has(.page:target) #ab1:not(:target){display:none}
+main .page:target{display:block}
+.js .page{display:none}.js .page.active{display:block}.heading{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}.heading h2{font-size:clamp(23px,3.5vw,32px);margin:0}.chip{background:#dbeafa;color:#2357a2;border-radius:40px;padding:5px 10px;font-weight:800;font-size:13px}.subtitle{color:var(--muted);margin:0 0 22px}.card{background:white;border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);padding:clamp(16px,3vw,25px);margin-bottom:17px}.card h3{margin:0 0 8px;font-size:20px;line-height:1.3}.card h3 .num{display:inline-flex;background:#e8f1ff;color:#255bac;align-items:center;justify-content:center;border-radius:10px;height:30px;min-width:30px;font-size:16px;margin-right:7px}.card p{margin:7px 0 14px}.muted{color:var(--muted)}.callout{border-left:5px solid #e7af3b;background:var(--yellow);border-radius:10px;padding:13px 15px;margin:14px 0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.subcard{border:1px solid #dde5f0;border-radius:14px;padding:13px;background:#fcfdff}.subcard h4{margin:0 0 10px}.field{display:block;width:100%;min-height:42px;border:1px solid #cbd6e4;background:#fff;border-radius:10px;padding:9px 11px;color:#263249}.textarea{min-height:100px;resize:vertical}.lab{display:block;font-size:13px;font-weight:750;color:#51607d;margin:9px 0 5px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:9px 15px;border-radius:11px;border:1px solid #ccd8e8;background:#fff;color:#284c82;font-weight:750;gap:5px}.btn.primary{background:#245fbc;color:white;border-color:#245fbc}.btn.ghost{background:#eff5ff;border-color:#dce7f7}.btn.danger{color:#962f4b;border-color:#efccd4}.btn:disabled{opacity:.5;cursor:not-allowed}.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}.status{display:inline-block;border-radius:9px;padding:9px 11px;margin-top:12px;font-weight:700;font-size:14px;background:#edf3fc;color:#375273}.status.good{background:#e1f5e9;color:#176543}.status.bad{background:#ffebef;color:#ac2d42}.status.neutral{background:#ecf3fb;color:#375273}.inlinefill{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.inlinefill>*{flex:1 1 150px}.correct{border-color:#34956d!important;background:#f1fff7!important}.incorrect{border-color:#d35c70!important;background:#fff3f5!important}.kv{display:grid;grid-template-columns:105px 1fr;gap:9px;align-items:center}.kv .key{font-weight:800;color:#526783}.case{padding:14px;border:1px solid var(--line);border-radius:14px;margin:10px 0;background:#fcfdff}.case strong{display:block;margin-bottom:7px}.case select{width:100%}.miniresult{font-size:13px;color:var(--muted);margin-top:6px;min-height:19px}.stepitem{display:flex;align-items:center;gap:9px;background:#f7faff;border:1px solid #d6e4f4;border-radius:12px;padding:11px 12px;margin:7px 0}.stepitem .snumber{background:#e1ebfb;border-radius:8px;padding:2px 9px;font-weight:800;color:#2a58a0}.stepitem .stepbody{flex:1}.stepitem .mov{display:flex;gap:5px}.stepitem .mov button{border:1px solid #c9d7ed;background:white;border-radius:8px;width:37px;height:37px;font-size:20px;font-weight:800;color:#2d5ba7}.flow{display:flex;gap:6px;align-items:center;justify-content:center;flex-direction:column;margin:12px 0;padding:13px;background:#eef5ff;border-radius:14px}.flow .fbox{text-align:center;border:2px solid #6494d5;background:white;max-width:570px;width:100%;padding:9px 12px;border-radius:8px;font-size:14px}.flow .fbox.end{border-radius:32px;background:#dbe9ff;font-weight:800}.flow .arrow{line-height:1;color:#2f5fab;font-size:20px}.flow .smallhint{font-size:12px;color:#607c9a}
+.shape{display:inline-flex;align-items:center;justify-content:center;min-width:85px;border:2px solid #87b0e0;background:#eaf4ff;padding:8px 12px}.shape.oval{border-radius:40px}.shape.rect{border-radius:4px}.diagramoptions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}.diagramoptions select{min-width:190px;max-width:100%}
+.towerbox{display:flex;align-items:end;justify-content:center;min-height:230px;background:linear-gradient(#fbfdff,#e9f2ff);border:1px solid #d6e3f3;border-radius:15px;padding:12px;position:relative}.towerstack{display:flex;flex-direction:column-reverse;align-items:center;min-height:185px;justify-content:flex-start;gap:2px}.block{height:51px;border-radius:5px 9px 7px 5px;border-bottom:8px solid #0002;border-right:9px solid #0002;box-shadow:0 4px 0 #0001;display:flex;align-items:center;justify-content:center;font-weight:850;text-shadow:0 1px 3px #0002}.block.small{width:61px;height:39px}.block.large{width:110px}.block.blue{background:#5a99e5;color:#133e76}.block.green{background:#8dc876;color:#234b30}.block.yellow{background:#ffd66b;color:#74500c}.block.red{background:#ef9588;color:#7d2833}.tilebtn{border:1px solid #cbd6e5;background:white;border-radius:12px;text-align:left;padding:11px;min-height:52px;color:#30425c;font-weight:750}.tilebtn .sq{display:inline-block;width:17px;height:17px;border-radius:4px;margin-right:6px;vertical-align:-3px}.sq.blue{background:#5a99e5}.sq.green{background:#8dc876}.sq.yellow{background:#ffd66b}.sq.red{background:#ef9588}.towerpalette{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rating{display:flex;gap:10px;align-items:center;margin:10px 0;padding:11px;border-radius:11px;background:#f7faff}.rating label{flex:1}.rating select{max-width:210px}.rulesgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rule{padding:12px;border:1px solid #d9e5f4;border-radius:12px;background:#f8fbff}.rule strong{display:block;color:#245aa5}
+.robotlayout{display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,1fr);gap:18px}.mapgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;max-width:455px}.cell{position:relative;aspect-ratio:1/1;border:1px solid #bcd0e6;background:#f1f8ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:clamp(19px,3vw,30px);font-weight:800}.cell.visited{background:#ddf3f4}.cell.goal{background:#fff4d6}.cell.occupied{box-shadow:0 0 0 2px #4c88d9 inset}.cell .xy{position:absolute;left:4px;top:0px;font-size:9px;color:#7a91ac;font-weight:700}.cell .direction{font-size:13px;position:absolute;bottom:0;right:3px;color:#1e4e9b}.commandbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.commandbar button{min-height:50px}.program{min-height:70px;display:flex;flex-wrap:wrap;gap:6px;background:#f7faff;border:1px dashed #bed0e3;border-radius:10px;padding:9px;align-content:flex-start}.cmd{display:inline-flex;background:white;border:1px solid #d9e4ef;padding:5px 8px;gap:5px;border-radius:8px;font-size:13px}.cmd b{color:#35639c}.robotmeta{font-size:13px;color:#536c86}.foot{margin-top:12px;padding:16px 0 0;color:#64758c;font-size:13px}.settings{position:fixed;z-index:30;inset:0;background:#14284b9c;display:none;align-items:center;justify-content:center;padding:16px}.settings.open{display:flex}.modal{width:min(470px,100%);background:white;border-radius:17px;padding:22px;box-shadow:0 20px 80px #12233a55}.switch{display:flex;gap:10px;align-items:center;margin:15px 0;font-weight:700}.switch input{width:21px;height:21px;accent-color:#245fbc}.allprog{height:7px;width:100%;background:#dce8f8;border-radius:10px;overflow:hidden;margin-top:15px}.allprog span{display:block;height:100%;background:#83c9a7;transition:width .3s}.endpage{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:25px 0}.endpage .btn{min-width:145px}
+@media(max-width:760px){.grid2,.grid3,.robotlayout,.rulesgrid{grid-template-columns:1fr}.top{padding:19px 0 14px}.wrap{padding:0 13px}.rating{flex-direction:column;align-items:stretch}.rating select{max-width:none}.card{border-radius:14px}.towerpalette{grid-template-columns:1fr 1fr}.tab{padding:10px}.cell{border-radius:4px}.stepitem{padding:8px;gap:5px}.stepitem .mov button{width:35px;height:38px}.stepitem .stepbody{font-size:14px}.robotlayout{gap:10px}}
+@media print{body{background:white;font-size:12px}.top{background:#fff;color:black;padding:4px}.top p,.actions,.nav,.endpage,.btnrow,.commandbar,.robotbuttons,.settings,.foot{display:none!important}.page{display:block!important;break-before:page}.page:first-of-type{break-before:auto}.card{box-shadow:none;border:1px solid #aaa;break-inside:avoid;margin:9px 0;padding:12px}.wrap{max-width:none;padding:0}.heading h2{font-size:19px}.subtitle{margin-bottom:10px}.textarea{height:70px;min-height:70px}.flow{padding:5px}.flow .fbox{padding:5px}.cell{width:auto;min-height:31px}.towerbox{min-height:90px}.top .row{display:block}.allprog{display:none}}
+
+/* More touch-friendly classroom UI */
+.tab{min-height:49px;display:flex;align-items:center;gap:3px}
+.field{font-size:16px!important;min-height:48px;touch-action:auto;user-select:text;-webkit-user-select:text;}
+textarea.field{min-height:130px;cursor:text;}
+.case select{background-color:#fff;}
+.student-tip{background:#edf9fa;border:1px solid #b9e6e3;border-radius:14px;padding:13px 16px;margin:12px 0 22px}
+.code-link{display:inline-block;border:1px solid #9dc2e9;background:#f4f9ff;border-radius:10px;padding:8px 12px;text-decoration:none;color:#2358a4;font-weight:800}
+.student-tip p{margin:4px 0 8px}
+body:has(#ab1:target) .tab[data-page="ab1"], body:has(#ab2:target) .tab[data-page="ab2"], body:has(#ab3:target) .tab[data-page="ab3"], body:has(#ab4:target) .tab[data-page="ab4"] {background:#245db8;color:#fff;border-color:#245db8}
+body:has(#ab1:target) .tab[data-page="ab1"] .mini,body:has(#ab2:target) .tab[data-page="ab2"] .mini,body:has(#ab3:target) .tab[data-page="ab3"] .mini,body:has(#ab4:target) .tab[data-page="ab4"] .mini{color:#fff;background:#ffffff30}
+@media(max-width:760px){.tabs{gap:6px}.tab{min-height:50px;padding:10px 11px}.card{margin-bottom:14px}.field{min-height:48px}}
+
+/* Definitive independent sheet switching: JavaScript mode always shows one sheet. */
+.js main .page{display:none!important}
+.js main .page.active{display:block!important}
+.page{scroll-margin-top:82px}
+.page-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:22px 0 9px;padding:16px;background:#e8effc;border:1px solid #d0dff2;border-radius:16px}
+.page-meta{font-weight:700;color:#536b8d}
+.block-choice{display:flex;align-items:center;gap:12px;border:1.5px solid #bcd1e7;background:#f7fbff;border-radius:13px;min-height:86px;padding:11px;color:#253c5b;text-align:left;font-weight:750;cursor:pointer;touch-action:manipulation}
+.block-choice:hover,.block-choice:focus-visible{border-color:#3775c9;background:#ecf5ff}
+.block-choice-label{font-weight:750;font-size:14px;line-height:1.25}
+.block-choice-label small{display:block;color:#5e7391;font-size:11px;margin-top:4px;font-weight:500}
+.block-graphic{width:74px;height:48px;flex:none;border-radius:5px 9px 7px 5px;box-shadow:inset -10px -8px 0 #0002,0 4px 0 #0001;border:1px solid #0002;position:relative}
+.block-graphic.small{width:48px;height:37px;margin-left:13px;margin-right:13px}
+.block-graphic.blue{background:#5a99e5}.block-graphic.green{background:#8dc876}.block-graphic.yellow{background:#ffd66b}.block-graphic.red{background:#ef9588}
+.tower-slot-fields{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0 14px}
+.slot-label{font-size:13px;color:#2d5484;font-weight:800;border:1px solid #d4e1f1;border-radius:12px;background:#f4f8fe;padding:10px}
+.slot-label select{margin-top:6px;font-weight:500;color:#283e60}
+.towerbox{min-height:250px}.towerstack{gap:6px;min-height:225px;justify-content:flex-start}
+.tower-placeholder{width:120px;height:58px;min-height:58px;background:#fff;border:2px dashed #a8b9ce;border-radius:10px;color:#4c6384;font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tower-placeholder span{font-weight:500;font-size:12px;color:#8191a7}
+.towerstack .block{display:flex;align-items:center;justify-content:center;min-height:58px;height:58px}
+.towerstack .block.small{min-height:58px;width:70px}
+.towerstack .block.large{width:120px}
+.tower-number{font-size:13px;opacity:.65}
+.tower-count{font-weight:700;font-size:13px;text-align:center;color:#396395;margin:8px 0 0}
+.small-helper{font-size:14px;margin:8px 0}
+@media (max-width:760px){.tower-slot-fields{grid-template-columns:1fr}.towerpalette{grid-template-columns:1fr 1fr}.block-choice{min-height:94px}.block-graphic{width:55px;height:41px}.block-graphic.small{width:40px;height:34px;margin-left:7px;margin-right:8px}}
+@media (max-width:520px){.towerpalette{grid-template-columns:1fr}.grid2,.grid3,.robotlayout{grid-template-columns:1fr}.nav .tabs{padding-bottom:10px}.page-actions .btn{flex:1}}
+
+/* AB 3: fingerfreundlicher Baukasten. Pointer Events arbeiten auch auf iPad Safari. */
+.tower-workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);align-items:start;gap:20px}
+.tower-workspace h4{font-size:16px;margin:4px 0 9px}
+.towerpalette{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.towerpalette .block-choice{min-height:95px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;justify-content:center;padding:10px 7px;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:grab;position:relative}
+.towerpalette .block-choice:active,.tower-piece:active{cursor:grabbing}
+.towerpalette .block-choice.is-chosen,.tower-piece.is-chosen{outline:3px solid #e99c2f;outline-offset:2px;background:#fff6e5}
+.towerpalette .block-choice.is-used{background:#eef3f9}
+.towerpalette .block-choice.is-used:after{content:'Im Turm';font-size:10px;position:absolute;top:5px;right:6px;color:#275582;background:white;border:1px solid #c4d5e9;padding:2px 5px;border-radius:20px}
+.towerpalette .block-choice .block-choice-label{font-size:12px;line-height:1.18}
+.towerpalette .block-choice .block-choice-label small{font-size:11px}
+.tower-drop{position:relative;min-height:89px;max-width:350px;margin:0 auto 7px;display:flex;align-items:center;gap:7px;justify-content:space-between;flex-wrap:nowrap;border:2.5px dashed #a0badb;border-radius:13px;background:#fff;padding:8px 11px;transition:background .12s,border-color .12s,transform .12s;cursor:pointer;touch-action:pan-y}
+.tower-drop.is-hover{border-color:#2375ba;background:#d9edff;transform:scale(1.02)}
+.tower-drop.is-chosen{border-color:#eca126;background:#fff8e8}
+.tower-drop.filled{border-style:solid;border-color:#b2cae8;background:#f6faff}
+.tower-drop .slot-caption{width:72px;flex:none;color:#37628f;font-size:12px;font-weight:800;line-height:1.3}
+.tower-drop .slot-caption span{display:block;color:#62788f;font-weight:600;font-size:11px}
+.tower-drop .slot-display{min-width:0;flex:1;display:flex;align-items:center;justify-content:center}
+.tower-drop .slot-empty{font-size:12px;color:#778da8;text-align:center;max-width:170px;line-height:1.35}
+.tower-drop .slot-remove{border:1px solid #c7d5e4;color:#566d8a;border-radius:7px;background:white;font-size:19px;height:34px;width:34px;flex:none;padding:0}
+.tower-drop .slot-remove:hover{background:#ffe9ec;color:#a72c46}
+.tower-piece{border:0;background:transparent;border-radius:10px;display:flex;justify-content:center;align-items:center;min-width:85px;min-height:62px;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:grab}
+.tower-piece .block-graphic.large{width:99px;height:53px}.tower-piece .block-graphic.small{width:61px;height:43px;margin-left:0;margin-right:0}
+.tower-playground{background:linear-gradient(180deg,#edf6ff 0%,#f9fcff 95%);border:1px solid #c7d9ee;border-radius:16px;padding:16px 10px 10px}
+.tower-playground .floor{height:12px;border-radius:8px;background:linear-gradient(90deg,#9eabc2,#536c90,#9eabc2);max-width:340px;margin:-1px auto 0}
+.tower-instructions{background:#eff7fc;border:1px solid #d4e7f5;border-radius:10px;padding:10px 13px;font-size:14px;margin:9px 0 14px}
+.tower-drag-ghost{position:fixed;z-index:10000;pointer-events:none;max-width:190px;min-width:135px;background:#fff;border:2px solid #4183d0;border-radius:13px;box-shadow:0 10px 30px #163c7966;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px;transform:translate(-50%,-50%) rotate(-3deg);touch-action:none}
+.tower-drag-ghost span{font-size:12px;font-weight:750}
+.tower-count{font-weight:800;color:#255a93;font-size:13px;text-align:center;margin-top:10px}
+@media(max-width:620px){.tower-workspace{grid-template-columns:1fr}.towerpalette{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.towerpalette .block-choice{min-height:100px}.towerpalette .block-choice-label{font-size:11px!important}.towerpalette .block-graphic.large{width:60px;height:39px}.towerpalette .block-graphic.small{width:46px;height:32px;margin:0}.tower-playground{padding:12px 7px}.tower-drop{min-height:82px}.tower-drop .slot-caption{width:67px}}
+@media print{.tower-drop{min-height:65px}.towerpalette .block-choice{min-height:55px}}
+
+/* Bedienung und Auswertung, Version 7 */
+.answer-result{display:block;padding:7px 10px;margin-top:7px;border-radius:9px;font-size:13px;font-weight:850;min-height:29px;background:#edf3fa;color:#62728c}
+.answer-result.answer-ok{background:#d5f3df;color:#0c6135;border:1px solid #54ab76}
+.answer-result.answer-bad{background:#ffe3e8;color:#a81935;border:1px solid #d45168}
+.tower-drop.tower-wrong{background:#fff2f3!important;border-color:#cd5066!important}
+.towerpalette .block-choice,.tower-piece,.towerpalette .block-choice *,.tower-piece *{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+.towerpalette .block-choice{overscroll-behavior:contain}
+.tower-drag-ghost{pointer-events:none!important;position:fixed!important;z-index:99999!important}
+.tower-drop{min-height:74px}
+/* Auch im Hochformat sind Vorrat und Ziel beim Schieben nahe beieinander. */
+@media(max-width:620px){
+ .tower-workspace{display:block}
+ .towerpalette{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .towerpalette .block-choice{min-height:75px;padding:4px 2px}
+ .towerpalette .block-choice .block-choice-label{font-size:10px!important}
+ .towerpalette .block-choice .block-choice-label small{display:none}
+ .tower-drop{min-height:67px;padding:5px 8px}
+ .tower-playground{padding:9px 6px}
+}
+.self-check{margin:10px 0;background:#f2f7ff;border:1px solid #d5e3f6;padding:9px 12px;border-radius:10px}.self-check summary{font-weight:750;color:#245db8;cursor:pointer}.self-check label{display:flex;gap:8px;align-items:center;font-size:14px}.self-check input{width:19px;height:19px}.self-check p{margin:7px 0}
+
+.runtime-off,.runtime-on{border-radius:12px;padding:10px 13px;margin:0 0 17px;font-size:14px}
+.runtime-off{border:2px solid #eab358;background:#fff4db;color:#79420a}
+.runtime-on{border:1px solid #94d2ae;background:#e9faef;color:#165b39}
+.runtime-button{margin-left:10px;border:1px solid #73b68f;background:#fff;color:#165b39;border-radius:8px;padding:4px 9px;font-size:13px;font-weight:bold}
+.tower-select-fallback{margin-top:17px;padding:14px;background:#f2f7fe;border:1px solid #cbdcf0;border-radius:14px}
+.tower-select-fallback h4{margin:0 0 4px}.tower-select-fallback p{font-size:13px;margin:4px 0 12px;color:#516987}
+.tower-select-label{display:block;margin:8px 0;font-size:14px;font-weight:750;color:#274771}
+.tower-select-label select{margin-top:5px}
+.tower-drop.tower-wrong{border:3px solid #d14254!important;background:#ffe6e9!important}
+.towerpalette button,.towerpiece,.tower-piece,.towerpalette button *,.tower-piece *{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+.tower-drag-ghost{pointer-events:none!important;position:fixed!important;z-index:99999!important}
+@media(max-width:760px){.tower-workspace{display:block!important}.towerpalette{grid-template-columns:repeat(3,minmax(0,1fr))!important}.towerpalette button{min-height:82px}}
+
+/* AB 2: komplett angeleitetes erstes Flussdiagramm */
+.ab2-guide{border:2px solid #bdd7fa;background:linear-gradient(145deg,#fff 50%,#f1f7ff);}
+.ab2-guide h3{font-size:22px;margin:0 0 10px}
+.ab2-intro{font-size:16px;line-height:1.55}
+.ab2-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:13px 0 18px}
+.ab2-symbol{background:#fff;border:1px solid #d5e3f3;padding:14px 10px;border-radius:13px;text-align:center;min-height:144px}
+.ab2-symbol strong{display:block;font-size:16px;margin:8px 0 5px}
+.ab2-symbol p{margin:0;color:#4a6181;font-size:14px}
+.ab2-sample-wrap{border:1px solid #c5d9f3;border-radius:15px;background:#f0f6ff;padding:15px;margin:14px 0 16px}
+.ab2-sample-wrap h4{font-size:18px;margin:0 0 7px;text-align:center}
+.ab2-flow{display:flex;flex-direction:column;align-items:center;max-width:470px;margin:12px auto}
+.ab2-node{background:#fff;color:#253d63;border:2.5px solid #6294d9;padding:11px 14px;text-align:center;width:min(100%,380px);font-weight:760;box-shadow:0 3px 0 #e2eaf9}
+.ab2-node.round{border-radius:45px;background:#dbeaff;width: min(85%,315px)}
+.ab2-node.rect{border-radius:6px}
+.ab2-connector{font-size:25px;line-height:1.3;font-weight:900;color:#245fb7}
+.ab2-symbol .sym-example{height:43px;display:flex;align-items:center;justify-content:center}
+.ab2-symbol .sym-pill{display:block;min-width:115px;padding:7px 12px;border:2px solid #6294d9;background:#e8f2ff;border-radius:30px;font-weight:800}
+.ab2-symbol .sym-rect{display:block;min-width:115px;padding:7px 12px;border:2px solid #6294d9;background:#fff;border-radius:3px;font-weight:800}
+.ab2-symbol .sym-arrow{font-size:32px;line-height:1;color:#245fb7;font-weight:900}
+.ab2-instructions{counter-reset:ab2todo;list-style:none;margin:0 0 10px;padding:0;display:grid;gap:9px}
+.ab2-instructions li{position:relative;padding:10px 12px 10px 51px;background:#fff;border:1px solid #d4e0ee;border-radius:11px;line-height:1.48}
+.ab2-instructions li:before{counter-increment:ab2todo;content:counter(ab2todo);position:absolute;left:12px;top:11px;width:26px;height:26px;border-radius:50%;background:#ddecff;color:#1b549c;font-size:15px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.ab2-try{border:1px solid #bdd7f0;padding:14px;border-radius:13px;background:white;margin:14px 0}
+.ab2-try strong{display:block;margin-bottom:6px}
+.ab2-try .case{margin:7px 0}
+.ab2-try h4{margin:0 0 9px}
+.ab2-goal{font-weight:740;color:#28598f;background:#e7f2ff;padding:10px 12px;border-radius:10px}
+@media(max-width:650px){.ab2-steps{grid-template-columns:1fr}.ab2-symbol{min-height:auto;display:grid;grid-template-columns:110px 1fr;align-items:center;text-align:left;gap:8px;padding:11px}.ab2-symbol .sym-example{grid-row:span 2}.ab2-symbol strong{margin:0}.ab2-symbol p{margin:0}.ab2-sample-wrap{padding:11px}.ab2-node{padding:9px 10px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="row"><div><div class="caps">Informatik · Klasse 6 · selbstständiges Lernen</div><h1>🤖 Algorithmen verstehen</h1><p>Vier Arbeitsblätter – direkt ausfüllen, Steine ziehen und die Antworten prüfen. Ohne Schulbuch. Version 8 – iPad.</p></div><div class="actions"><button id="settingsOpen" type="button">⚙️ Einstellungen</button><button id="exportOpen" type="button">📄 Antworten sichern</button></div></div><div aria-label="Lernfortschritt" class="allprog"><span id="progressBar" style="width:0%"></span></div></div></header>
+<nav aria-label="Arbeitsblätter" class="nav"><div class="wrap tabs" role="tablist"><a aria-selected="true" class="tab" data-page="ab1" href="#ab1" role="tab"><span class="mini">AB 1</span> Algorithmen im Alltag</a><a aria-selected="false" class="tab" data-page="ab2" href="#ab2" role="tab"><span class="mini">AB 2</span> Ablaufpläne</a><a aria-selected="false" class="tab" data-page="ab3" href="#ab3" role="tab"><span class="mini">AB 3</span> Genaue Anweisungen</a><a aria-selected="false" class="tab" data-page="ab4" href="#ab4" role="tab"><span class="mini">AB 4</span> Roboter-Labor</a></div></nav>
+<main class="wrap"><div id="runtimeNotice" class="runtime-off" role="status">⚠️ Die interaktiven Funktionen sind hier noch nicht aktiv. Öffne die <strong>veröffentlichte Webseite</strong> über ihren <strong>https://-Link in Safari</strong>. Eine HTML-Dateivorschau von ChatGPT oder der Dateien-App führt die Aufgaben möglicherweise nicht aus.</div><noscript><div class="student-tip"><strong>Du kannst die Aufgaben auswählen und in die weißen Felder schreiben.</strong><p>Falls die Schaltflächen „Prüfen“, „Turm bauen“ oder „Roboter“ nicht funktionieren, öffne die veröffentlichte Webseite in Safari oder Chrome. Die reine Dateivorschau führt manchmal kein JavaScript aus.</p></div></noscript><div class="student-tip"><strong>👋 So arbeitest du:</strong> Tippe oben auf <strong>AB 1, AB 2, AB 3 oder AB 4</strong>. Es wird immer nur <strong>ein Arbeitsblatt</strong> angezeigt. Schreibe direkt in die weißen Kästchen oder wähle Antworten aus. <strong>Du brauchst kein Schulbuch.</strong><p><strong>Recherchehilfe:</strong> Die QR-Codes deiner Lehrkraft führen zu Materialien von C.C. Buchner. Alternativ kannst du unter <a href="https://www.ccbuchner.de/medien" rel="noopener" target="_blank">ccbuchner.de/medien</a> die Mediencodes <strong>38121-44</strong> und <strong>38121-45</strong> eingeben.</p></div>
+<section class="page active" id="ab1" role="tabpanel"><div class="heading"><span class="chip">Arbeitsblatt 1</span><h2>Algorithmen sind überall</h2></div><p class="subtitle">Lernziel: Du erkennst Algorithmen, bemerkst fehlende Angaben und kannst eine eigene Schrittfolge entwickeln.</p>
+<div class="card"><h3><span class="num">1</span> Was weißt du noch?</h3><p>Erkläre mit deinen eigenen Worten: Was ist ein Algorithmus? Nenne ein Beispiel aus deinem Alltag.</p><textarea aria-label="Eigene Erklärung von Algorithmus" class="field textarea save" data-key="ab1_eigen" placeholder="Ein Algorithmus ist ... Zum Beispiel ..." spellcheck="true"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Enthält deine Erklärung eine genaue Reihenfolge und ein Beispiel?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab1_eigen"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details><p class="muted">Tipp: Denke an eine genaue Schritt-für-Schritt-Anleitung.</p></div>
+<div class="card"><h3><span class="num">2</span> Algorithmus oder nicht?</h3><p>Wähle bei jedem Beispiel. Ein Algorithmus besteht aus ausführbaren, geordneten und klaren Schritten.</p><div id="algoExamples"><div class="case"><strong>1. Eine Koch-App zeigt nacheinander genaue Zubereitungsschritte.</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="yes" data-key="algo_0"><option value="">Bitte auswählen</option><option value="yes">Ja, Algorithmus</option><option value="no">Nein, zu ungenau</option></select></div><div class="case"><strong>2. Jemand sagt nur: „Mach etwas Leckeres.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="no" data-key="algo_1"><option value="">Bitte auswählen</option><option value="yes">Ja, Algorithmus</option><option value="no">Nein, zu ungenau</option></select></div><div class="case"><strong>3. Ein Navi berechnet eine Route aus Startort und Ziel.</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="yes" data-key="algo_2"><option value="">Bitte auswählen</option><option value="yes">Ja, Algorithmus</option><option value="no">Nein, zu ungenau</option></select></div><div class="case"><strong>4. Ein Kind sagt: „Mal irgendwas Schönes.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="no" data-key="algo_3"><option value="">Bitte auswählen</option><option value="yes">Ja, Algorithmus</option><option value="no">Nein, zu ungenau</option></select></div><div class="case"><strong>5. Eine Waschmaschine folgt einem festgelegten Waschprogramm.</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="yes" data-key="algo_4"><option value="">Bitte auswählen</option><option value="yes">Ja, Algorithmus</option><option value="no">Nein, zu ungenau</option></select></div></div><div class="btnrow"><button class="btn primary" onclick="checkAlgorithms()" type="button">Antworten prüfen</button><span class="status neutral" id="algoFeedback" role="status">Noch nicht geprüft.</span></div></div>
+<div class="card"><h3><span class="num">3</span> Welche Anweisung fehlt?</h3><div class="callout"><strong>Merke:</strong> Ein Algorithmus ist eine Schritt-für-Schritt-Anleitung. Die Schritte müssen <strong>klar</strong>, <strong>in der richtigen Reihenfolge</strong> und <strong>vollständig</strong> sein.</div><p>In jeder Anleitung fehlt ein wichtiger Schritt. Wähle die passende Ergänzung.</p><div id="gapExamples"><div class="case"><strong>1. Eine Foto-Anleitung lautet: 1. Öffne die Kamera. 2. Speichere das Foto. Was fehlt?</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="foto" data-key="gap_0"><option value="">Bitte auswählen</option><option value="foto">Drücke den Auslöser und mache ein Foto.</option><option value="ipad">Lade das iPad auf.</option><option value="fertig">Schließe zuerst die Kamera.</option></select></div><div class="case"><strong>2. Beim Kakao-Zubereiten steht: 1. Stelle die Tasse bereit. 2. Trinke den Kakao. Was fehlt?</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="kakao" data-key="gap_1"><option value="">Bitte auswählen</option><option value="umruehren">Stelle die leere Tasse weg.</option><option value="kakao">Fülle Kakao in die Tasse und rühre um.</option><option value="lied">Sing ein Lied.</option></select></div><div class="case"><strong>3. Ein Roboter soll zur Tür. Die Anleitung sagt nur: „Gehe los!“ Was fehlt?</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="weg" data-key="gap_2"><option value="">Bitte auswählen</option><option value="weg">Eine genaue Richtung und die Zahl der Schritte.</option><option value="tempo">Ein schöner Name für den Roboter.</option><option value="farbe">Die Lieblingsfarbe des Roboters.</option></select></div></div><div class="btnrow"><button class="btn primary" onclick="checkGaps()" type="button">Fehlende Schritte prüfen</button><span class="status neutral" id="gapFeedback" role="status">Noch nicht geprüft.</span></div></div>
+<div class="card"><h3><span class="num">4</span> Erfinde einen eigenen Algorithmus</h3><p>Wähle etwas, das du häufig machst (z. B. dein iPad starten, einen Schultag vorbereiten oder ein Getränk mixen). Formuliere mindestens vier eindeutige Schritte.</p><textarea class="field textarea save" data-key="ab1_steps" placeholder="1. ...
+2. ...
+3. ...
+4. ..." spellcheck="true" style="min-height:150px"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Sind mindestens vier Schritte vorhanden und eindeutig beschrieben?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab1_steps"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details><p class="muted">Diese kreative Antwort prüfst du am Ende selbst: Sind alle Schritte verständlich, richtig und vollständig?</p></div>
+<div class="card"><h3>📱 Hilfe durch den QR-Code von C.C. Buchner</h3><p>Du hast einen QR-Code von deiner Lehrkraft bekommen. Scanne ihn mit deinem iPad. Wenn du den QR-Code nicht öffnen kannst, besuche <a class="code-link" href="https://www.ccbuchner.de/medien" rel="noopener" target="_blank">www.ccbuchner.de/medien</a> und gib den <strong>Mediencode 38121-44</strong> ein.</p><p><strong>Material:</strong> Tabellenvorlage / zusätzliche Arbeitsmaterialien. Nutze die Materialien als Hilfe. <strong>Du brauchst das Schulbuch nicht.</strong></p></div><div aria-label="Zwischen den Arbeitsblättern wechseln" class="page-actions"><span class="page-meta">Arbeitsblatt 1 von 4</span><a class="btn primary" href="#ab2">Weiter zu AB 2 →</a></div></section>
+<section class="page" id="ab2" role="tabpanel"><div class="heading"><span class="chip">Arbeitsblatt 2</span><h2>Algorithmen als Ablaufplan</h2></div><p class="subtitle">Lernziel: Du bringst Schritte in eine sinnvolle Reihenfolge und lernst Flussdiagramme kennen.</p>
+
+<div class="card ab2-guide" aria-labelledby="ab2GuideTitle">
+  <h3 id="ab2GuideTitle">📖 Neu für dich: Was ist ein Ablaufplan?</h3>
+  <p class="ab2-intro"><strong>Du kennst bereits Algorithmen:</strong> Das sind genaue Anweisungen in der richtigen Reihenfolge. Ein <strong>Ablaufplan</strong> zeigt diese Schritte als Bild mit <strong>Formen und Pfeilen</strong>. Man nennt ihn auch <strong>Flussdiagramm</strong>. Du brauchst dafür kein Schulbuch.</p>
+  <p class="ab2-goal">💡 Merke: Lies den Ablaufplan immer von oben nach unten. Folge dabei den Pfeilen.</p>
+  <h4>Schritt 1: Diese drei Zeichen musst du kennen</h4>
+  <div class="ab2-steps">
+    <div class="ab2-symbol"><div class="sym-example"><span class="sym-pill">START / ENDE</span></div><strong>Ovale Form</strong><p>Hier beginnt oder endet der Ablauf.</p></div>
+    <div class="ab2-symbol"><div class="sym-example"><span class="sym-rect">Anweisung</span></div><strong>Rechteck</strong><p>Hier steht, <em>was du tun sollst</em>.</p></div>
+    <div class="ab2-symbol"><div class="sym-example"><span class="sym-arrow" aria-hidden="true">↓</span></div><strong>Pfeil</strong><p>Er zeigt, welcher Schritt als Nächstes kommt.</p></div>
+  </div>
+  <h4>Schritt 2: Sieh dir das fertige Beispiel an</h4>
+  <p>Stell dir vor, du willst deinen <strong>Rucksack packen</strong>. Dafür müssen die Anweisungen in einer sinnvollen Reihenfolge stehen:</p>
+  <div class="ab2-sample-wrap">
+    <h4>Beispiel-Flussdiagramm: Rucksack packen</h4>
+    <div class="ab2-flow" aria-label="Beispiel von oben nach unten: Start, Rucksack öffnen, Matheheft hineinlegen, Rucksack schließen, Ende">
+      <div class="ab2-node round">START</div><div class="ab2-connector" aria-hidden="true">↓</div>
+      <div class="ab2-node rect">Rucksack öffnen</div><div class="ab2-connector" aria-hidden="true">↓</div>
+      <div class="ab2-node rect">Matheheft hineinlegen</div><div class="ab2-connector" aria-hidden="true">↓</div>
+      <div class="ab2-node rect">Rucksack schließen</div><div class="ab2-connector" aria-hidden="true">↓</div>
+      <div class="ab2-node round">ENDE</div>
+    </div>
+    <p style="margin-bottom:0"><strong>Warum ist die Reihenfolge wichtig?</strong> Du kannst das Heft nicht in einen geschlossenen Rucksack legen. Deshalb steht „Rucksack öffnen“ vor „Matheheft hineinlegen“.</p>
+  </div>
+  <h4>Schritt 3: Probiere das Beispiel kurz selbst aus</h4>
+  <p>Wähle die richtigen Formen aus. Du darfst so oft verbessern, wie du möchtest.</p>
+  <div class="ab2-try" id="ab2Practice">
+    <div class="case"><label for="ab2TryOne"><strong>1. Welche Form braucht die Anweisung „Matheheft hineinlegen“?</strong></label>
+      <select id="ab2TryOne" class="field save ans" data-key="flow_intro_0" data-expected="rect"><option value="">Bitte auswählen</option><option value="oval">Ovale Form</option><option value="rect">Rechteck</option><option value="arrow">Pfeil</option></select>
+    </div>
+    <div class="case"><label for="ab2TryTwo"><strong>2. Welche Form bekommt „ENDE“?</strong></label>
+      <select id="ab2TryTwo" class="field save ans" data-key="flow_intro_1" data-expected="oval"><option value="">Bitte auswählen</option><option value="oval">Ovale Form</option><option value="rect">Rechteck</option><option value="arrow">Pfeil</option></select>
+    </div>
+    <div class="btnrow"><button type="button" class="btn primary" onclick="checkFlowIntro()">Mein Beispiel prüfen</button><span id="flowIntroFeedback" class="status neutral" role="status" aria-live="polite">Wähle zuerst beide Antworten.</span></div>
+  </div>
+  <h4>Schritt 4: Jetzt bearbeitest du die drei Aufgaben unten</h4>
+  <ol class="ab2-instructions">
+    <li><strong>Aufgabe 1 – Symbole:</strong> Lies jede Frage, tippe auf „Bitte auswählen“ und entscheide dich für eine Form. Mit <strong>„Symbole prüfen“</strong> erfährst du, ob du richtig liegst.</li>
+    <li><strong>Aufgabe 2 – Schritte ordnen:</strong> Die fünf Rechenschritte zu <strong>38 + 24</strong> sind absichtlich vertauscht. Nutze <strong>↑</strong> oder <strong>↓</strong>, um sie an die richtige Stelle zu schieben. Rechts verändert sich dabei automatisch dein Flussdiagramm. Tippe auf <strong>„Reihenfolge prüfen“</strong>. Du musst hier keine Zahlen eintippen.</li>
+    <li><strong>Aufgabe 3 – Eigener Ablauf:</strong> Schreibe mindestens <strong>fünf genaue Anweisungen</strong> für deinen Morgen. Beginne mit „START“ und ende mit „ENDE“. Du kannst jeden Schritt in eine neue Zeile schreiben. Nutze darunter die Selbstkontrolle.</li>
+  </ol>
+  <p class="ab2-goal">✅ Wichtig: <strong>Ein Schritt pro Rechteck.</strong> Start und Ende haben ihre eigene Form. Die Pfeile zeigen die Reihenfolge an.</p>
+</div>
+<div class="card"><h3><span class="num">1</span> Symbole erkennen</h3><p>Schau dir die drei Zeichen in der Erklärung oben an. Tippe bei jeder Frage auf das Auswahlfeld und wähle die passende Antwort. Danach auf „Symbole prüfen“ tippen.</p><div id="shapeQuestions"><div class="case"><strong>1. Womit zeichnest du Start und Ende?</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="oval" data-key="shape_0"><option value="">Bitte auswählen</option><option value="oval">Oval / abgerundete Form</option><option value="rect">Rechteck</option><option value="arrow">Pfeil</option></select></div><div class="case"><strong>2. Welche Form zeigt eine Anweisung?</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="rect" data-key="shape_1"><option value="">Bitte auswählen</option><option value="oval">Oval / abgerundete Form</option><option value="rect">Rechteck</option><option value="arrow">Pfeil</option></select></div><div class="case"><strong>3. Was verbindet die Schritte und zeigt die Richtung?</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="arrow" data-key="shape_2"><option value="">Bitte auswählen</option><option value="oval">Oval / abgerundete Form</option><option value="rect">Rechteck</option><option value="arrow">Pfeil</option></select></div></div><div class="btnrow"><button class="btn primary" onclick="checkShapes()" type="button">Symbole prüfen</button><span class="status neutral" id="shapeFeedback" role="status">Noch nicht geprüft.</span></div></div>
+<div class="card"><h3><span class="num">2</span> Sortiere den Rechenalgorithmus</h3><p>Ein Algorithmus soll die Zahlen <strong>38 + 24</strong> schriftlich addieren. Die fünf Rechenschritte sind durcheinandergeraten. Tippe bei einem Schritt auf <strong>↑ oder ↓</strong>, bis die Reihenfolge sinnvoll ist. <strong>Rechts siehst du sofort deinen Ablaufplan.</strong> Drücke am Ende „Reihenfolge prüfen“.</p><div class="grid2"><div><div aria-label="Rechenalgorithmus sortieren" id="stepsList"></div><div class="btnrow"><button class="btn primary" onclick="checkOrder()" type="button">Reihenfolge prüfen</button><button class="btn ghost" onclick="resetOrder()" type="button">Neu mischen</button></div><div class="status neutral" id="orderFeedback" role="status">Sortiere alle fünf Schritte.</div></div><div><h4 style="margin:0 0 7px">Dein Flussdiagramm</h4><div class="flow" id="flowVis"></div></div></div></div>
+<div class="card"><h3><span class="num">3</span> Neues Beispiel: Dein Morgen-Algorithmus</h3><p>Entwickle für deinen Schulmorgen einen Ablauf mit mindestens fünf Schritten. Achte auf die Reihenfolge und lasse keinen wichtigen Schritt aus.</p><textarea class="field textarea save" data-key="ab2_own" placeholder="Start → ... → ... → ... → Ende" spellcheck="true" style="min-height:150px"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Gibt es mindestens fünf Schritte in sinnvoller Reihenfolge?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab2_own"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details><p class="muted">Zusatzfrage: Welche Schritte würdest du in einem Flussdiagramm als Rechteck zeichnen?</p><textarea class="field textarea save" data-key="ab2_shapes" placeholder="Meine Erklärung ..." spellcheck="true"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Hast du erklärt, welche Schritte in Rechtecke gehören?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab2_shapes"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details></div>
+<div class="card"><h3>📱 Hilfe durch den QR-Code von C.C. Buchner</h3><p>Du hast einen QR-Code von deiner Lehrkraft bekommen. Scanne ihn mit deinem iPad. Wenn du den QR-Code nicht öffnen kannst, besuche <a class="code-link" href="https://www.ccbuchner.de/medien" rel="noopener" target="_blank">www.ccbuchner.de/medien</a> und gib den <strong>Mediencode 38121-45</strong> ein.</p><p><strong>Material:</strong> Schrittfolgen und Ablaufpläne. Nutze die Materialien als Hilfe. <strong>Du brauchst das Schulbuch nicht.</strong></p></div><div aria-label="Zwischen den Arbeitsblättern wechseln" class="page-actions"><a class="btn" href="#ab1">← AB 1 öffnen</a><a class="btn primary" href="#ab3">Weiter zu AB 3 →</a></div></section>
+<section class="page" id="ab3" role="tabpanel"><div class="heading"><span class="chip">Arbeitsblatt 3</span><h2>So genau muss eine Anweisung sein</h2></div><p class="subtitle">Lernziel: Du formulierst Anweisungen so klar, dass andere sie nicht falsch verstehen können.</p>
+<div class="card"><h3><span class="num">1</span> Welche Anweisung ist genauer?</h3><p>Ein Roboter soll mit Bauklötzen einen Turm bauen. Welche Beschreibung ist eindeutiger?</p><div class="subcard"><p><strong>A:</strong> „Baue erst mit einem Stein und lege dann den anderen darauf.“</p><p><strong>B:</strong> „Stelle den großen blauen Stein auf den Tisch. Lege den kleinen grünen Stein mittig darauf.“</p><select aria-label="Genauere Anweisung auswählen" class="field save" data-key="ab3_choice" data-expected="b"><option value="">Bitte auswählen</option><option value="a">A ist genauer</option><option value="b">B ist genauer</option><option value="same">Beide sind gleich genau</option></select><label class="lab" for="ab3_reason">Begründe deine Entscheidung:</label><textarea class="field textarea save" data-key="ab3_reason" id="ab3_reason" placeholder="Die Anweisung ist genauer, weil ..." spellcheck="true"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Hast du Farbe, Größe und Position als wichtige Angaben genannt?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab3_reason"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details><div class="btnrow"><button class="btn primary" onclick="checkPrecision()" type="button">Auswahl prüfen</button><span class="status neutral" id="precisionFeedback" role="status">Noch nicht geprüft.</span></div></div></div>
+<div class="card" id="turmAufgabe"><h3><span class="num">2</span> Ziehe die Steine auf den Turm!</h3>
+<p>Baue einen Turm aus <strong>drei</strong> Klötzchen. Ziehe jeden Stein <strong>mit dem Finger</strong> vom Steinvorrat auf einen der drei Bauplätze. Du kannst einen Stein später auf einen anderen Platz ziehen oder mit × wieder entfernen.</p>
+<div class="callout">Baue nach dieser genauen Anleitung: <strong>Ganz unten</strong> steht der große <strong>blaue</strong> Stein. <strong>In der Mitte</strong> liegt der kleine <strong>grüne</strong> Stein. <strong>Ganz oben</strong> liegt der kleine <strong>gelbe</strong> Stein.</div>
+<div class="tower-instructions">👆 <strong>Mit dem Finger:</strong> Den Stein berühren und direkt zum Bauplatz ziehen. <strong>Alternative 1:</strong> Stein antippen, dann Bauplatz antippen. <strong>Alternative 2:</strong> Die Auswahllisten unter dem Turm benutzen. Wenn die HTML-Datei nur als Vorschau angezeigt wird, öffne die veröffentlichte Webseite direkt in Safari.</div>
+<div class="tower-workspace"><div><h4>🧱 Steinvorrat – hier einen Stein nehmen</h4><div class="towerpalette" id="towerPalette"><button type="button" class="block-choice" data-block="bBlue" draggable="false" aria-label="Großer blauer Stein auswählen oder ziehen"><span class="block-graphic blue large" aria-hidden="true"></span><span class="block-choice-label">Großer blauer Stein<small>Hier anfassen und ziehen</small></span></button><button type="button" class="block-choice" data-block="bGreen" draggable="false" aria-label="Großer grüner Stein auswählen oder ziehen"><span class="block-graphic green large" aria-hidden="true"></span><span class="block-choice-label">Großer grüner Stein<small>Hier anfassen und ziehen</small></span></button><button type="button" class="block-choice" data-block="sGreen" draggable="false" aria-label="Kleiner grüner Stein auswählen oder ziehen"><span class="block-graphic green small" aria-hidden="true"></span><span class="block-choice-label">Kleiner grüner Stein<small>Hier anfassen und ziehen</small></span></button><button type="button" class="block-choice" data-block="sYellow" draggable="false" aria-label="Kleiner gelber Stein auswählen oder ziehen"><span class="block-graphic yellow small" aria-hidden="true"></span><span class="block-choice-label">Kleiner gelber Stein<small>Hier anfassen und ziehen</small></span></button><button type="button" class="block-choice" data-block="bRed" draggable="false" aria-label="Großer roter Stein auswählen oder ziehen"><span class="block-graphic red large" aria-hidden="true"></span><span class="block-choice-label">Großer roter Stein<small>Hier anfassen und ziehen</small></span></button><button type="button" class="block-choice" data-block="sBlue" draggable="false" aria-label="Kleiner blauer Stein auswählen oder ziehen"><span class="block-graphic blue small" aria-hidden="true"></span><span class="block-choice-label">Kleiner blauer Stein<small>Hier anfassen und ziehen</small></span></button></div>
+<p class="muted" style="font-size:12px">Es gibt sechs verschiedene Steine. Du benötigst genau drei.</p></div>
+<div><h4>🏗️ Dein Turm – hier die Steine ablegen</h4><div class="tower-playground"><div id="towerStack" class="towerboard" aria-label="Turm mit drei Zielplätzen"><div class="tower-drop" id="towerSlot2" data-slot="2" role="button" tabindex="0" aria-label="Bauplatz 3, OBEN. Hier Stein ablegen"><span class="slot-caption">3 · OBEN<span>Abschluss</span></span><span class="slot-display"><span class="slot-empty">Stein hierhin ziehen</span></span></div><div class="tower-drop" id="towerSlot1" data-slot="1" role="button" tabindex="0" aria-label="Bauplatz 2, MITTE. Hier Stein ablegen"><span class="slot-caption">2 · MITTE<span>Zweiter Stein</span></span><span class="slot-display"><span class="slot-empty">Stein hierhin ziehen</span></span></div><div class="tower-drop" id="towerSlot0" data-slot="0" role="button" tabindex="0" aria-label="Bauplatz 1, UNTEN. Hier Stein ablegen"><span class="slot-caption">1 · UNTEN<span>Grundstein</span></span><span class="slot-display"><span class="slot-empty">Stein hierhin ziehen</span></span></div></div><div class="floor" aria-hidden="true"></div></div><p id="towerCount" class="tower-count" aria-live="polite">0 von 3 Bauplätzen belegt</p>
+</div></div><div class="tower-select-fallback" id="towerSelectFallback"><h4>Falls das Ziehen nicht klappt: Steine hier auswählen</h4><p>Wähle für jeden Bauplatz einen Stein aus. Der Turm wird sofort aktualisiert.</p><label class="tower-select-label" for="towerChoice2">3 · OBEN:<select class="field" id="towerChoice2" data-tower-select="2" aria-label="Stein für Bauplatz 3 OBEN auswählen"><option value="">– Stein auswählen –</option><option value="bBlue">Großer blauer Stein</option><option value="bGreen">Großer grüner Stein</option><option value="sGreen">Kleiner grüner Stein</option><option value="sYellow">Kleiner gelber Stein</option><option value="bRed">Großer roter Stein</option><option value="sBlue">Kleiner blauer Stein</option></select></label><label class="tower-select-label" for="towerChoice1">2 · MITTE:<select class="field" id="towerChoice1" data-tower-select="1" aria-label="Stein für Bauplatz 2 MITTE auswählen"><option value="">– Stein auswählen –</option><option value="bBlue">Großer blauer Stein</option><option value="bGreen">Großer grüner Stein</option><option value="sGreen">Kleiner grüner Stein</option><option value="sYellow">Kleiner gelber Stein</option><option value="bRed">Großer roter Stein</option><option value="sBlue">Kleiner blauer Stein</option></select></label><label class="tower-select-label" for="towerChoice0">1 · UNTEN:<select class="field" id="towerChoice0" data-tower-select="0" aria-label="Stein für Bauplatz 1 UNTEN auswählen"><option value="">– Stein auswählen –</option><option value="bBlue">Großer blauer Stein</option><option value="bGreen">Großer grüner Stein</option><option value="sGreen">Kleiner grüner Stein</option><option value="sYellow">Kleiner gelber Stein</option><option value="bRed">Großer roter Stein</option><option value="sBlue">Kleiner blauer Stein</option></select></label></div><div class="btnrow"><button type="button" class="btn ghost" onclick="undoTower()">↶ Letzten entfernen</button><button type="button" class="btn ghost" onclick="clearTower()">↺ Neu bauen</button><button type="button" class="btn primary" onclick="checkTower()">✓ Turm prüfen</button></div>
+<div class="status neutral" id="towerFeedback" role="status" aria-live="polite">Ziehe den ersten Stein auf einen Bauplatz.</div></div>
+<div class="card"><h3><span class="num">3</span> Genau oder unklar?</h3><p>Entscheide bei jeder Anweisung, ob sie für einen Roboter eindeutig ist.</p><div id="precisionCases"><div class="case"><strong>1. „Gehe genau zwei Felder nach vorn.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="yes" data-key="prec_0"><option value="">Bitte auswählen</option><option value="yes">Genau und eindeutig</option><option value="no">Unklar / mehrdeutig</option></select></div><div class="case"><strong>2. „Laufe ein gutes Stück.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="no" data-key="prec_1"><option value="">Bitte auswählen</option><option value="yes">Genau und eindeutig</option><option value="no">Unklar / mehrdeutig</option></select></div><div class="case"><strong>3. „Drehe dich um 90 Grad nach rechts.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="yes" data-key="prec_2"><option value="">Bitte auswählen</option><option value="yes">Genau und eindeutig</option><option value="no">Unklar / mehrdeutig</option></select></div><div class="case"><strong>4. „Stelle den Stein irgendwo hin.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="no" data-key="prec_3"><option value="">Bitte auswählen</option><option value="yes">Genau und eindeutig</option><option value="no">Unklar / mehrdeutig</option></select></div><div class="case"><strong>5. „Lege den kleinen gelben Stein mittig auf den großen blauen Stein.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="yes" data-key="prec_4"><option value="">Bitte auswählen</option><option value="yes">Genau und eindeutig</option><option value="no">Unklar / mehrdeutig</option></select></div></div><div class="btnrow"><button class="btn primary" onclick="checkPrecisionCases()" type="button">Aussagen prüfen</button><span class="status neutral" id="precCasesFeedback" role="status">Noch nicht geprüft.</span></div></div>
+<div class="card"><h3><span class="num">4</span> Roboter-Sprache verbessern</h3><p>Verbessere diese unklare Anweisung: <em>„Nimm einen Stein und lege ihn schön auf die anderen.“</em></p><textarea class="field textarea save" data-key="ab3_improved" placeholder="Meine eindeutige Anweisung lautet ..." spellcheck="true" style="min-height:120px"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Nennst du genau welchen Stein, wohin er gelegt wird und wie?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab3_improved"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details></div><div aria-label="Zwischen den Arbeitsblättern wechseln" class="page-actions"><a class="btn" href="#ab2">← AB 2 öffnen</a><a class="btn primary" href="#ab4">Weiter zu AB 4 →</a></div></section>
+<section class="page" id="ab4" role="tabpanel"><div class="heading"><span class="chip">Arbeitsblatt 4</span><h2>Die vier Regeln im Roboter-Labor</h2></div><p class="subtitle">Lernziel: Du prüfst Algorithmen auf Richtigkeit, Genauigkeit, Vollständigkeit und Ausführbarkeit.</p>
+<div class="card"><h3><span class="num">1</span> Merke dir die vier Regeln</h3><div class="rulesgrid"><div class="rule"><strong>✓ Richtigkeit</strong>Die Schritte führen zum gewünschten Ergebnis.</div><div class="rule"><strong>◎ Genauigkeit</strong>Jeder Schritt ist eindeutig verständlich.</div><div class="rule"><strong>▣ Vollständigkeit</strong>Kein notwendiger Schritt fehlt.</div><div class="rule"><strong>⚙ Ausführbarkeit</strong>Alle Befehle sind tatsächlich möglich.</div></div><p class="muted">Jede Regel ist wichtig. Schon ein Fehler kann den ganzen Algorithmus verhindern.</p></div>
+<div class="card"><h3><span class="num">2</span> Finde den Regelverstoß</h3><p>Welches Problem ist jeweils am deutlichsten zu erkennen? Ordne die passende Regel zu.</p><div id="rulesCases"><div class="case"><strong>1. Der Roboter soll genau zum Ziel rechts gehen, aber der Plan führt nach links.</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="right" data-key="rule_0"><option value="">Bitte auswählen</option><option value="right">Richtigkeit</option><option value="precise">Genauigkeit</option><option value="complete">Vollständigkeit</option><option value="possible">Ausführbarkeit</option></select></div><div class="case"><strong>2. „Lege den Stein irgendwo ab.“</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="precise" data-key="rule_1"><option value="">Bitte auswählen</option><option value="right">Richtigkeit</option><option value="precise">Genauigkeit</option><option value="complete">Vollständigkeit</option><option value="possible">Ausführbarkeit</option></select></div><div class="case"><strong>3. Im Plan steht nur „Socke in den Korb legen“, aber der Weg zur Socke fehlt.</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="complete" data-key="rule_2"><option value="">Bitte auswählen</option><option value="right">Richtigkeit</option><option value="precise">Genauigkeit</option><option value="complete">Vollständigkeit</option><option value="possible">Ausführbarkeit</option></select></div><div class="case"><strong>4. Ein Roboter soll ohne Arme eine Kiste hochheben.</strong><select aria-label="Antwort auswählen" class="field save ans" data-expected="possible" data-key="rule_3"><option value="">Bitte auswählen</option><option value="right">Richtigkeit</option><option value="precise">Genauigkeit</option><option value="complete">Vollständigkeit</option><option value="possible">Ausführbarkeit</option></select></div></div><div class="btnrow"><button class="btn primary" onclick="checkRules()" type="button">Regeln prüfen</button><span class="status neutral" id="rulesFeedback" role="status">Noch nicht geprüft.</span></div></div>
+<div class="card"><h3><span class="num">3</span> Programmiere einen Socken-Roboter</h3><p>Der Roboter startet <strong>unten links</strong> und schaut nach <strong>rechts →</strong>. Er soll die Socke 🧦 holen und in die Wäschebox 🧺 legen. Baue einen Algorithmus aus Befehlen und drücke anschließend <strong>„Programm ausführen“</strong>.</p><div class="robotlayout"><div><div aria-label="Roboter-Spielfeld mit fünf mal fünf Feldern" class="mapgrid" id="robotGrid"></div><p class="robotmeta">🤖 Roboter · 🧦 Socke · 🧺 Wäschebox · Türkis = besuchtes Feld</p><div class="status neutral" id="robotFeedback" role="status">Dein Roboter wartet auf Befehle.</div></div><div class="robotbuttons"><h4 style="margin:3px 0 9px">Befehle antippen</h4><div class="commandbar"><button class="btn ghost" onclick="addCmd('F')" type="button">↑ Vorwärts</button><button class="btn ghost" onclick="addCmd('L')" type="button">↶ Links drehen</button><button class="btn ghost" onclick="addCmd('R')" type="button">↷ Rechts drehen</button><button class="btn ghost" onclick="addCmd('P')" type="button">🧦 Aufheben</button><button class="btn ghost" onclick="addCmd('D')" style="grid-column:1/-1" type="button">🧺 Ablegen</button></div><p class="muted">Bei „Vorwärts“ geht der Roboter ein Feld in seine Blickrichtung. „Links drehen“ und „Rechts drehen“ verändern nur die Blickrichtung.</p><h4 style="margin:10px 0 6px">Dein Programm</h4><div class="program" id="commandList"><span class="muted">Noch keine Befehle.</span></div><div class="btnrow"><button class="btn primary" onclick="runRobot()" type="button">▶ Programm ausführen</button><button class="btn ghost" onclick="undoCmd()" type="button">↶ Zurück</button><button class="btn ghost" onclick="resetRobot()" type="button">↺ Neustart</button></div></div></div></div>
+<div class="card"><h3><span class="num">4</span> Denke wie eine Programmiererin / ein Programmierer</h3><p>Was passiert, wenn der Roboter die Socke aufheben soll, aber noch nicht auf ihrem Feld steht? Welche Regel wird verletzt? Erkläre.</p><textarea class="field textarea save" data-key="ab4_reflect" placeholder="Dann ... Die Regel ... wird verletzt, weil ..." spellcheck="true"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Erklärst du, warum der Roboter den Befehl nicht ausführen kann?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab4_reflect"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details><p>Schreibe einen eigenen Befehl auf, den der Roboter nicht ausführen kann, und erkläre warum.</p><textarea class="field textarea save" data-key="ab4_extra" placeholder="Mein Befehl: ...
+Das geht nicht, weil ..." spellcheck="true"></textarea><details class="self-check"><summary>✓ Meine Textantwort selbst prüfen</summary><p><strong>Prüffrage:</strong> Nennst du einen unmöglichen Befehl und die passende Begründung?</p><label><input type="checkbox" class="selfcheck-input" data-check="ab4_extra"> Ja, ich habe meine Antwort überprüft.</label><p class="muted">Diese eigene Antwort wird nicht automatisch als richtig oder falsch bewertet.</p></details></div><div aria-label="Zwischen den Arbeitsblättern wechseln" class="page-actions"><a class="btn" href="#ab3">← AB 3 öffnen</a><a class="btn primary" href="#ab1">Zurück zu AB 1 ↺</a></div></section>
+<div class="foot">Eigenständig formulierte Aufgaben zum Thema Algorithmen · Du benötigst kein Buch. Die QR-Codes von C.C. Buchner sind freiwillige Zusatzhilfen. Deine Eingaben werden nach Möglichkeit nur auf diesem Gerät gespeichert. Für die Lehrkraft können die Ergebnisse über „Antworten sichern“ heruntergeladen werden.</div>
+</main>
+<div aria-labelledby="settingsTitle" aria-modal="true" class="settings" id="settings" role="dialog"><div class="modal"><h2 id="settingsTitle">⚙️ Einstellungen</h2><p>Wähle, wie sich die Webseite bei der Bearbeitung verhalten soll.</p><label class="switch"><input checked="" id="feedbackOn" type="checkbox"/><span>Richtig/Falsch-Rückmeldungen anzeigen</span></label><label class="switch"><input checked="" id="autosaveOn" type="checkbox"/><span>Fortschritt auf dem Gerät speichern</span></label><div class="callout">Die Webseite ist ohne Anmeldung nutzbar. Freitext-Antworten können nicht automatisch bewertet werden.</div><div class="btnrow"><button class="btn primary" id="settingsClose" type="button">Fertig</button><button class="btn danger" id="clearAll" type="button">Alle eigenen Antworten löschen</button></div></div></div>
+<script>
+(()=>{'use strict';
+const KEY='algorithmen6e_V8_NOV11';const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let data={fields:{},answers:{},order:['o4','o1','o3','o5','o2'],tower:[null,null,null],commands:[],page:'ab1',feedback:true,autosave:true};
+try{
+ let raw=localStorage.getItem(KEY);
+ // Bring over work from the previous version when possible, without changing the old data.
+ // Frühere Versionen werden nicht übernommen: alte Einstellungen und Fehlerzustände blockierten die Auswertung.
+ const old=JSON.parse(raw||'null');
+ if(old&&typeof old==='object')data={...data,...old,fields:old.fields||{},answers:old.answers||{},order:old.order||data.order,tower:old.tower||data.tower,commands:old.commands||[]};
+}catch(e){}
+// In dieser neuen Fassung ist die Kontrolle standardmäßig aktiv, auch wenn eine alte Version sie ausgeschaltet hatte.
+try{if(!localStorage.getItem(KEY))data.feedback=true;}catch(e){data.feedback=true;}
+function save(){if(!data.autosave)return;try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
+function feedback(id,message,correct){const el=$(id);if(!el)return;el.className='status '+(data.feedback?(correct===true?'good':correct===false?'bad':'neutral'):'neutral');el.textContent=data.feedback?message:'Die Antwortkontrolle ist ausgeschaltet. Aktiviere sie oben unter Einstellungen.';}
+const options=(arr,choose='Bitte auswählen')=>'<option value="">'+esc(choose)+'</option>'+arr.map(o=>`<option value="${esc(o[0])}">${esc(o[1])}</option>`).join('');
+const algorithmExamples=[['Eine Koch-App zeigt nacheinander genaue Zubereitungsschritte.','yes'],['Jemand sagt nur: „Mach etwas Leckeres.“','no'],['Ein Navi berechnet eine Route aus Startort und Ziel.','yes'],['Ein Kind sagt: „Mal irgendwas Schönes.“','no'],['Ein Roboter fährt nach festgelegten Befehlen über ein Spielfeld.','yes']];
+const yesNo=[['yes','Ja, Algorithmus'],['no','Nein, zu ungenau']];
+
+const gapExamples=[
+  {q:'Eine Foto-Anleitung lautet: 1. Öffne die Kamera. 2. Speichere das Foto. Was fehlt?',a:'foto',opts:[['foto','Drücke den Auslöser und mache ein Foto.'],['ipad','Lade das iPad auf.'],['fertig','Schließe zuerst die Kamera.']]},
+  {q:'Beim Kakao-Zubereiten steht: 1. Stelle die Tasse bereit. 2. Trinke den Kakao. Was fehlt?',a:'kakao',opts:[['umruehren','Stelle die leere Tasse weg.'],['kakao','Fülle Kakao in die Tasse und rühre um.'],['lied','Sing ein Lied.']]},
+  {q:'Ein Roboter soll zur Tür. Die Anleitung sagt nur: „Gehe los!“ Was fehlt?',a:'weg',opts:[['weg','Eine genaue Richtung und die Zahl der Schritte.'],['tempo','Ein schöner Name für den Roboter.'],['farbe','Die Lieblingsfarbe des Roboters.']]}
+];
+
+const shapes=[['Womit zeichnest du Start und Ende?','oval'],['Welche Form zeigt eine Anweisung?','rect'],['Was verbindet die Schritte und zeigt die Richtung?','arrow']];
+
+const stepMap={o1:'Schreibe 38 und 24 stellenrichtig untereinander.',o2:'Addiere die Einer: 8 + 4 = 12.',o3:'Schreibe 2 bei den Einern und merke 1 Zehner.',o4:'Addiere die Zehner: 3 + 2 + 1 = 6.',o5:'Schreibe das Ergebnis 62 unter den Strich.'};const targetOrder=Object.keys(stepMap);const sortedOrder=['o4','o1','o3','o5','o2'];
+const blocks={
+ bBlue:{label:'Großer blauer Stein',color:'blue',size:'large'},
+ bGreen:{label:'Großer grüner Stein',color:'green',size:'large'},
+ sGreen:{label:'Kleiner grüner Stein',color:'green',size:'small'},
+ sYellow:{label:'Kleiner gelber Stein',color:'yellow',size:'small'},
+ bRed:{label:'Großer roter Stein',color:'red',size:'large'},
+ sBlue:{label:'Kleiner blauer Stein',color:'blue',size:'small'}
+};
+// Exactly three independent places, even if a previous version saved five stones.
+data.tower=Array.from({length:3},(_,i)=>blocks[(data.tower||[])[i]]?(data.tower||[])[i]:null);
+const seenBlocks=new Set();data.tower=data.tower.map(id=>{if(!id||seenBlocks.has(id))return null;seenBlocks.add(id);return id;});
+const preciseCases=[['„Gehe genau zwei Felder nach vorn.“','yes'],['„Laufe ein gutes Stück.“','no'],['„Drehe dich um 90 Grad nach rechts.“','yes'],['„Stelle den Stein irgendwo hin.“','no'],['„Lege den kleinen gelben Stein mittig auf den großen blauen.“','yes']];
+
+const ruleCases=[['Der Roboter soll genau zum Ziel rechts gehen, aber der Plan führt nach links.','right'],['„Lege den Stein irgendwo ab.“','precise'],['Im Plan steht nur „Socke in den Korb legen“, aber der Weg zur Socke fehlt.','complete'],['Ein Roboter, der nur fahren kann, soll drei Meter hoch springen.','possible']];
+const ruleOpts=[['right','Richtigkeit'],['precise','Genauigkeit'],['complete','Vollständigkeit'],['possible','Ausführbarkeit']];
+
+function setupControls(){document.querySelectorAll('.save').forEach(el=>{let k=el.dataset.key;if(Object.prototype.hasOwnProperty.call(data.fields,k))el.value=data.fields[k];el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>{data.fields[k]=el.value;el.classList.remove('correct','incorrect');
+ if(el.tagName==='SELECT' && el.dataset.expected){decorateAnswer(el,el.value===el.dataset.expected);}
+ else {const marker=el.parentElement.querySelector('.answer-result');if(marker){marker.textContent='Antwort geändert – bitte erneut prüfen';marker.className='answer-result';}}
+ save();updateProgress();});});$('feedbackOn').checked=data.feedback;$('autosaveOn').checked=data.autosave;$('feedbackOn').onchange=e=>{data.feedback=e.target.checked;save();document.querySelectorAll('.status').forEach(s=>{s.textContent='Du kannst deine Aufgaben bearbeiten und bei Bedarf prüfen.';s.className='status neutral'})};$('autosaveOn').onchange=e=>{data.autosave=e.target.checked;if(data.autosave)save();else try{localStorage.removeItem(KEY)}catch(x){}};}
+function decorateAnswer(el,ok){
+ const row=el.closest('.case')||el.parentElement;
+ let marker=row.querySelector('.answer-result');
+ if(!marker){marker=document.createElement('span');marker.className='answer-result';marker.setAttribute('aria-live','polite');el.insertAdjacentElement('afterend',marker);}
+ el.classList.remove('correct','incorrect');marker.className='answer-result';
+ if(!data.feedback){marker.textContent='Antwort gespeichert';return;}
+ if(!el.value){marker.textContent='○ Noch keine Antwort';return;}
+ marker.classList.add(ok?'answer-ok':'answer-bad');marker.textContent=ok?'✓ RICHTIG':'✕ FALSCH – noch einmal überlegen';
+ el.classList.add(ok?'correct':'incorrect');
+}
+function checkSelects(prefix,id){
+ const arr=[...document.querySelectorAll(`select[data-key^="${prefix}"]`)];let done=0,correct=0;
+ arr.forEach(el=>{const ok=el.value===el.dataset.expected;if(el.value){done++;if(ok)correct++;}decorateAnswer(el,ok);});
+ data.answers[prefix]={done,correct,total:arr.length};save();updateProgress();
+ const msg=done<arr.length?`✅ ${correct} richtig · ❌ ${done-correct} falsch · ${arr.length-done} noch offen. Fülle die fehlenden Felder aus.`:`✅ ${correct} richtig · ❌ ${done-correct} falsch. ${correct===arr.length?'Super, alles richtig!':'Verbessere die rot markierten Antworten und prüfe erneut.'}`;
+ feedback(id,msg,done===arr.length&&correct===arr.length);
+}
+window.checkFlowIntro=()=>checkSelects('flow_intro_','flowIntroFeedback');window.checkAlgorithms=()=>checkSelects('algo_','algoFeedback');window.checkGaps=()=>checkSelects('gap_','gapFeedback');window.checkShapes=()=>checkSelects('shape_','shapeFeedback');window.checkPrecisionCases=()=>checkSelects('prec_','precCasesFeedback');window.checkRules=()=>checkSelects('rule_','rulesFeedback');
+window.checkPrecision=()=>{const el=document.querySelector('[data-key="ab3_choice"]');const v=el.value;const ok=v==='b';decorateAnswer(el,ok);data.answers.ab3choice={done:!!v,correct:ok};feedback('precisionFeedback',!v?'○ Bitte wähle zuerst eine Antwort.':ok?'✅ Richtig! B beschreibt Farbe, Größe und Position genau.':'❌ Falsch. Überlege, welche Anweisung ein Roboter eindeutig ausführen könnte.',v?ok:null);save();updateProgress();};
+function renderOrder(){data.order=data.order.filter(k=>stepMap[k]);targetOrder.forEach(k=>{if(!data.order.includes(k))data.order.push(k)});$('stepsList').innerHTML=data.order.map((id,i)=>`<div class="stepitem"><span class="snumber">${i+1}</span><span class="stepbody">${esc(stepMap[id])}</span><span class="mov"><button type="button" data-move="up" data-idx="${i}" ${i===0?'disabled':''} aria-label="Schritt nach oben">↑</button><button type="button" data-move="down" data-idx="${i}" ${i===data.order.length-1?'disabled':''} aria-label="Schritt nach unten">↓</button></span></div>`).join('');$('flowVis').innerHTML='<div class="fbox end">Start</div>'+data.order.map((id,i)=>`<div class="arrow">↓</div><div class="fbox">${esc(stepMap[id])}</div>`).join('')+'<div class="arrow">↓</div><div class="fbox end">Ende</div><div class="smallhint">Die Reihenfolge ändert sich mit deinen Pfeiltasten.</div>';$('stepsList').querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>{const i=+b.dataset.idx,j=i+(b.dataset.move==='up'?-1:1);[data.order[i],data.order[j]]=[data.order[j],data.order[i]];save();renderOrder();updateProgress();});}
+window.checkOrder=()=>{const ok=data.order.every((k,i)=>k===targetOrder[i]);data.answers.order={done:true,correct:ok};feedback('orderFeedback',ok?'✅ RICHTIG! Alle fünf Schritte sind in der richtigen Reihenfolge.':'❌ FALSCH: Die Reihenfolge passt noch nicht. Überlege: Einer vor Zehnern, dann das Ergebnis.',ok);save();updateProgress();};
+window.resetOrder=()=>{data.order=[...sortedOrder];save();renderOrder();feedback('orderFeedback','Die Schritte wurden neu gemischt.',null);};
+// Version 8: Ein vereinfachtes Pointer-Event-Ziehsystem (iPad Safari/Chrome),
+// mit Touch-Fallback für ältere Geräte UND drei unabhängig bedienbaren Auswahllisten.
+let selectedTowerPiece=null, towerHistory=[], dragState=null, suppressClickUntil=0;
+function blockGraphic(id){const b=blocks[id];return `<span aria-hidden="true" class="block-graphic ${b.color} ${b.size}"></span>`;}
+function towerNotice(message,correct=null){
+ const el=$('towerFeedback');el.setAttribute('aria-live','polite');
+ el.className='status '+(data.feedback?(correct===true?'good':correct===false?'bad':'neutral'):'neutral');
+ el.textContent=data.feedback?message:(correct!==null?'Die Richtig/Falsch-Anzeige ist ausgeschaltet (oben unter Einstellungen).':message);
+}
+function renderTower(){
+ for(let i=0;i<3;i++){
+  const slot=$('towerSlot'+i),display=slot.querySelector('.slot-display'),id=data.tower[i];
+  slot.classList.toggle('filled',!!id);slot.classList.remove('tower-wrong');
+  display.innerHTML=id?`<button type="button" class="tower-piece" data-block="${id}" data-from-slot="${i}" aria-label="${esc(blocks[id].label)} verschieben">${blockGraphic(id)}</button>`:'<span class="slot-empty">Hier ablegen</span>';
+  let remove=slot.querySelector('.slot-remove');
+  if(id){if(!remove){remove=document.createElement('button');remove.type='button';remove.className='slot-remove';remove.textContent='×';remove.setAttribute('aria-label','Stein entfernen');slot.appendChild(remove);}}
+  else if(remove)remove.remove();
+  const selector=$('towerChoice'+i);if(selector)selector.value=id||'';
+ }
+ document.querySelectorAll('#towerPalette .block-choice').forEach(el=>{el.classList.toggle('is-used',data.tower.includes(el.dataset.block));el.classList.toggle('is-chosen',!!selectedTowerPiece&&selectedTowerPiece.id===el.dataset.block);});
+ $('towerCount').textContent=`${data.tower.filter(Boolean).length} von 3 Bauplätzen belegt`;
+}
+function setTowerSlot(slot,id,origin=null){
+ if(!(slot>=0&&slot<=2))return;
+ if(!id){removeTowerSlot(slot);return;}
+ if(!blocks[id])return;
+ const prev=[...data.tower];
+ const existing=data.tower.indexOf(id);
+ if(origin===null && existing>=0)origin=existing;
+ if(origin!==null&&origin!==slot){data.tower[origin]=data.tower[slot]||null;}
+ else if(existing>=0&&existing!==slot)data.tower[existing]=null;
+ data.tower[slot]=id;
+ selectedTowerPiece=null;
+ if(prev.join(',')===data.tower.join(',')){renderTower();return;}
+ towerHistory.push(prev);data.answers.tower={done:false,correct:false};
+ renderTower();save();updateProgress();towerNotice(`✓ ${blocks[id].label} liegt jetzt auf Bauplatz ${slot+1}. Tippe auf „Turm prüfen“, wenn du fertig bist.`);
+}
+function pickTower(id,origin=null){if(!blocks[id])return;selectedTowerPiece={id,origin};renderTower();towerNotice(`Ausgewählt: ${blocks[id].label}. Tippe jetzt auf den gewünschten Bauplatz.`);}
+function removeTowerSlot(slot){if(!data.tower[slot])return;towerHistory.push([...data.tower]);data.tower[slot]=null;selectedTowerPiece=null;data.answers.tower={done:false,correct:false};renderTower();save();updateProgress();towerNotice('Stein entfernt.');}
+function targetSlot(x,y){const el=document.elementFromPoint(x,y);const found=el&&el.closest('.tower-drop');return found?Number(found.dataset.slot):null;}
+function highlightSlot(index){document.querySelectorAll('.tower-drop').forEach(el=>el.classList.toggle('is-hover',index!==null&&Number(el.dataset.slot)===index));}
+function sourceFrom(el){return el&&el.closest&&el.closest('.block-choice[data-block], .tower-piece[data-block]');}
+function beginDrag(element,x,y,sourceType,pointerId=null){
+ const origin=element.hasAttribute('data-from-slot')?Number(element.dataset.fromSlot):null;
+ dragState={id:element.dataset.block,origin,startX:x,startY:y,x,y,moved:false,ghost:null,pointerId,sourceType};
+}
+function moveDrag(x,y){
+ const d=dragState;if(!d)return;
+ d.x=x;d.y=y;
+ if(!d.moved&&Math.hypot(x-d.startX,y-d.startY)>=7){
+  d.moved=true;d.ghost=document.createElement('div');d.ghost.className='tower-drag-ghost';
+  d.ghost.innerHTML=blockGraphic(d.id)+`<span>${esc(blocks[d.id].label)}</span>`;
+  document.body.appendChild(d.ghost);
+ }
+ if(d.moved){d.ghost.style.left=x+'px';d.ghost.style.top=y+'px';highlightSlot(targetSlot(x,y));}
+}
+function endDrag(x,y){
+ if(!dragState)return;const d=dragState;const slot=d.moved?targetSlot(x,y):null;
+ if(d.ghost)d.ghost.remove();dragState=null;highlightSlot(null);
+ suppressClickUntil=d.moved?Date.now()+350:0;
+ if(slot!==null){setTowerSlot(slot,d.id,d.origin);}
+ else if(!d.moved){pickTower(d.id,d.origin);}
+ else towerNotice('Nicht auf einem Bauplatz losgelassen. Du kannst auch den Stein antippen und anschließend den Bauplatz.');
+}
+function cancelDrag(){if(dragState?.ghost)dragState.ghost.remove();dragState=null;highlightSlot(null);}
+const pointerAvailable='PointerEvent' in window;
+for(const root of [$('towerPalette'),$('towerStack')]){
+ root.addEventListener('dragstart',e=>e.preventDefault());
+ if(pointerAvailable){
+  root.addEventListener('pointerdown',e=>{
+   const el=sourceFrom(e.target);if(!el||e.isPrimary===false||e.button!==0)return;
+   beginDrag(el,e.clientX,e.clientY,'pointer',e.pointerId);
+   try{el.setPointerCapture(e.pointerId);}catch(error){}
+  });
+ }else{
+  root.addEventListener('touchstart',e=>{
+   const el=sourceFrom(e.target);if(!el||e.touches.length!==1)return;
+   const t=e.touches[0];beginDrag(el,t.clientX,t.clientY,'touch');
+  },{passive:true});
+  root.addEventListener('mousedown',e=>{
+   const el=sourceFrom(e.target);if(!el||e.button!==0||Date.now()<suppressClickUntil)return;
+   beginDrag(el,e.clientX,e.clientY,'mouse');e.preventDefault();
+  });
+ }
+}
+if(pointerAvailable){
+ document.addEventListener('pointermove',e=>{if(!dragState||dragState.pointerId!==e.pointerId)return;moveDrag(e.clientX,e.clientY);if(e.cancelable)e.preventDefault();});
+ document.addEventListener('pointerup',e=>{if(!dragState||dragState.pointerId!==e.pointerId)return;endDrag(e.clientX,e.clientY);});
+ document.addEventListener('pointercancel',e=>{if(dragState&&dragState.pointerId===e.pointerId)cancelDrag();});
+}else{
+ document.addEventListener('touchmove',e=>{if(!dragState||dragState.sourceType!=='touch'||e.touches.length!==1)return;const t=e.touches[0];moveDrag(t.clientX,t.clientY);if(e.cancelable)e.preventDefault();},{passive:false});
+ document.addEventListener('touchend',e=>{if(!dragState||dragState.sourceType!=='touch')return;const t=e.changedTouches[0];if(t)endDrag(t.clientX,t.clientY);else cancelDrag();if(e.cancelable)e.preventDefault();},{passive:false});
+ document.addEventListener('touchcancel',()=>cancelDrag());
+ document.addEventListener('mousemove',e=>{if(dragState?.sourceType==='mouse'){moveDrag(e.clientX,e.clientY);e.preventDefault();}});
+ document.addEventListener('mouseup',e=>{if(dragState?.sourceType==='mouse')endDrag(e.clientX,e.clientY);});
+}
+$('towerPalette').addEventListener('click',e=>{if(Date.now()<suppressClickUntil)return;const el=sourceFrom(e.target);if(el)pickTower(el.dataset.block,null);});
+$('towerStack').addEventListener('click',e=>{
+ if(Date.now()<suppressClickUntil)return;const slotEl=e.target.closest('.tower-drop');if(!slotEl)return;
+ const index=Number(slotEl.dataset.slot);
+ if(e.target.closest('.slot-remove')){removeTowerSlot(index);return;}
+ const piece=sourceFrom(e.target);
+ if(piece&&!selectedTowerPiece){pickTower(piece.dataset.block,index);return;}
+ if(selectedTowerPiece){setTowerSlot(index,selectedTowerPiece.id,selectedTowerPiece.origin);return;}
+ towerNotice('Tippe zunächst auf einen Stein und anschließend auf seinen Bauplatz.');
+});
+$('towerStack').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('tower-drop')&&selectedTowerPiece){e.preventDefault();setTowerSlot(Number(e.target.dataset.slot),selectedTowerPiece.id,selectedTowerPiece.origin);}});
+document.querySelectorAll('[data-tower-select]').forEach(select=>{
+ select.addEventListener('change',()=>{const i=Number(select.dataset.towerSelect);if(select.value)setTowerSlot(i,select.value);else removeTowerSlot(i);});
+});
+window.clearTower=()=>{if(data.tower.some(Boolean))towerHistory.push([...data.tower]);data.tower=[null,null,null];data.answers.tower={done:false,correct:false};selectedTowerPiece=null;renderTower();save();updateProgress();towerNotice('Turm geleert. Wähle jetzt neue Steine.');};
+window.undoTower=()=>{if(towerHistory.length){data.tower=towerHistory.pop();data.answers.tower={done:false,correct:false};selectedTowerPiece=null;renderTower();save();updateProgress();towerNotice('Letzte Änderung zurückgenommen.');}else towerNotice('Noch kein Schritt zum Rückgängigmachen.');};
+window.checkTower=()=>{
+ const filled=data.tower.filter(Boolean).length;
+ if(filled!==3){towerNotice(`⚠️ Noch nicht fertig: ${filled} von 3 Bauplätzen belegt.`,false);return;}
+ const expected=['bBlue','sGreen','sYellow'];const correct=expected.every((id,i)=>data.tower[i]===id);
+ data.answers.tower={done:true,correct};
+ towerNotice(correct?'✅ RICHTIG! Alle drei Steine stehen an der passenden Stelle.':'❌ FALSCH! Mindestens ein Stein steht auf dem falschen Platz. Sieh dir die roten Bauplätze an.',correct);
+ for(let i=0;i<3;i++)$('towerSlot'+i).classList.toggle('tower-wrong',data.feedback&&data.tower[i]!==expected[i]);
+ save();updateProgress();
+};
+const cmdNames={F:'↑ Vorwärts',L:'↶ Links drehen',R:'↷ Rechts drehen',P:'🧦 Aufheben',D:'🧺 Ablegen'};let robotState=null;
+function initialRobot(){return{x:0,y:4,dir:0,carrying:false,sockThere:true,delivered:false,visited:['0,4'],error:''}};
+function simulate(){const dirs=[[1,0],[0,1],[-1,0],[0,-1]];const st=initialRobot();for(let i=0;i<data.commands.length;i++){const cmd=data.commands[i];if(cmd==='F'){const nx=st.x+dirs[st.dir][0],ny=st.y+dirs[st.dir][1];if(nx<0||nx>4||ny<0||ny>4){st.error=`Befehl ${i+1}: Der Roboter würde das Spielfeld verlassen.`;break}st.x=nx;st.y=ny;st.visited.push(nx+','+ny);}else if(cmd==='L'){st.dir=(st.dir+3)%4;}else if(cmd==='R'){st.dir=(st.dir+1)%4;}else if(cmd==='P'){if(st.x===2&&st.y===2&&st.sockThere&&!st.carrying){st.sockThere=false;st.carrying=true;}else{st.error=`Befehl ${i+1}: Hier liegt keine Socke zum Aufheben.`;break;}}else if(cmd==='D'){if(st.x===4&&st.y===4&&st.carrying){st.carrying=false;st.delivered=true;}else{st.error=`Befehl ${i+1}: Du kannst nur mit Socke an der Wäschebox ablegen.`;break;}}}return st;}
+function renderRobot(st=initialRobot()){robotState=st;const arrows=['→','↓','←','↑'];$('robotGrid').innerHTML=Array.from({length:25},(_,i)=>{const x=i%5,y=Math.floor(i/5);const visit=st.visited.includes(x+','+y),here=st.x===x&&st.y===y,box=x===4&&y===4,sock=x===2&&y===2&&st.sockThere;return `<div class="cell ${visit?'visited':''} ${box?'goal':''} ${here?'occupied':''}" title="Feld ${x+1}, ${y+1}"><span class="xy">${x+1}/${y+1}</span>${here?'🤖':sock?'🧦':box?'🧺':''}${here?`<span class="direction">${arrows[st.dir]}${st.carrying?' 🧦':''}</span>`:''}</div>`}).join('');}
+function renderCommands(){let v=data.commands;$('commandList').innerHTML=v.length?v.map((c,i)=>`<span class="cmd"><b>${i+1}.</b>${cmdNames[c]}</span>`).join(''):'<span class="muted">Noch keine Befehle.</span>';}
+window.addCmd=c=>{if(data.commands.length>=70){feedback('robotFeedback','Maximal 70 Befehle erlaubt.',false);return;}data.commands.push(c);save();renderCommands();renderRobot();feedback('robotFeedback',`${data.commands.length} Befehl(e) eingetragen. Drücke „Programm ausführen“.`,null);updateProgress();};window.undoCmd=()=>{data.commands.pop();save();renderCommands();renderRobot();feedback('robotFeedback','Letzten Befehl entfernt.',null)};window.resetRobot=()=>{data.commands=[];save();renderCommands();renderRobot();feedback('robotFeedback','Neustart. Plane deinen Weg zur Socke und dann zur Wäschebox.',null);updateProgress();};
+window.runRobot=()=>{const st=simulate();renderRobot(st);if(st.error){feedback('robotFeedback',st.error,false);}else if(st.delivered){feedback('robotFeedback','✅ RICHTIG! Die Socke ist in der Wäschebox. Dein Algorithmus funktioniert.',true);}else if(st.carrying){feedback('robotFeedback','Die Socke wurde aufgehoben, liegt aber noch nicht in der Wäschebox. Ergänze weitere Befehle.',false);}else{feedback('robotFeedback','❌ NOCH FALSCH: Der Roboter ist noch nicht am Ziel. Ergänze oder korrigiere deinen Algorithmus.',false);}data.answers.robot={done:true,correct:st.delivered};save();updateProgress();};
+const pageIDs=['ab1','ab2','ab3','ab4'];
+function gotoPage(page){
+ if(!pageIDs.includes(page))page='ab1';
+ data.page=page;
+ document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===page));
+ document.querySelectorAll('.tab').forEach(el=>{
+  const selected=el.dataset.page===page;
+  el.setAttribute('aria-selected',selected?'true':'false');
+  if(selected)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');
+ });
+ save();
+}
+function navFromHash(){
+ const page=location.hash.slice(1);
+ gotoPage(pageIDs.includes(page)?page:'ab1');
+}
+// All links have permanent targets. Do not rewrite a link's href in its click handler:
+// that was the reason the previous version skipped AB 2.
+document.querySelectorAll('a[href^="#ab"]').forEach(link=>{
+ link.addEventListener('click',()=>{
+  const id=link.getAttribute('href').slice(1);
+  if(pageIDs.includes(id))gotoPage(id);
+ });
+});
+window.addEventListener('hashchange',navFromHash);
+function updateProgress(){let count=Object.values(data.fields).filter(x=>x&&x.trim()).length;count+=data.tower.some(Boolean)?1:0;count+=data.commands.length>0?1:0;count+=data.order.join(',')===targetOrder.join(',')?1:0;const pct=Math.min(100,Math.round(count/33*100));$('progressBar').style.width=pct+'%';}
+function getResults(){let out=['Algorithmen · Klasse 6 · Eigene Ergebnisse', 'Erstellt: '+new Date().toLocaleString('de-DE'),''];let titles={ab1_eigen:'AB1 Eigene Erklärung',ab1_steps:'AB1 Eigene Schritte',ab2_own:'AB2 Morgen-Algorithmus',ab2_shapes:'AB2 Formen im Diagramm',ab3_reason:'AB3 Begründung',ab3_improved:'AB3 Verbesserte Anweisung',ab4_reflect:'AB4 Fehleranalyse',ab4_extra:'AB4 Eigene Anweisung'};Object.entries(data.fields).forEach(([k,v])=>{if(v)out.push((titles[k]||k)+': '+v,'')});out.push('AB2 Sortierung: '+data.order.map(x=>stepMap[x]).join(' | '),'AB3 Turm (unten → oben): '+data.tower.map(x=>x?blocks[x].label:'(leer)').join(' | '),'AB4 Befehle: '+data.commands.map(x=>cmdNames[x]).join(' | '),'');out.push('Automatische Prüfungen (nur ausgefüllte Prüfungen):');Object.entries(data.answers).forEach(([k,v])=>out.push(`${k}: ${v.total?`${v.correct} von ${v.total} richtig`:(v.correct?'richtig':'noch nicht richtig')}`));return out.join('\n');}
+$('exportOpen').onclick=()=>{const blob=new Blob(['\ufeff'+getResults()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Meine_Algorithmen_Antworten.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);};
+const modal=$('settings');$('settingsOpen').onclick=()=>modal.classList.add('open');$('settingsClose').onclick=()=>modal.classList.remove('open');modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});$('clearAll').onclick=()=>{if(!confirm('Wirklich ALLE deine Antworten und Programme löschen?'))return;try{localStorage.removeItem(KEY)}catch(e){}location.reload();};
+setupControls();renderOrder();renderTower();renderCommands();renderRobot();document.getElementById('runtimeNotice').className='runtime-on';document.getElementById('runtimeNotice').innerHTML='✅ <strong>Interaktive Funktionen sind aktiv.</strong> Die Aufgaben kannst du jetzt bearbeiten und deine Antworten prüfen. <button type="button" class="runtime-button" onclick="document.getElementById(\'runtimeNotice\').textContent=\'✅ Funktionstest erfolgreich – die Webseite läuft.\'">Funktion testen</button>';const startPage=pageIDs.includes(location.hash.slice(1))?location.hash.slice(1):'ab1';gotoPage(startPage);updateProgress();document.documentElement.classList.add('js');
+})();
+</script>
+</body>
+</html>
